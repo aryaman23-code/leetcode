@@ -1,25 +1,18 @@
 class Solution {
 public:
     int eliminateMaximum(vector<int>& dist, vector<int>& speed) {
-        int count = 0, n = dist.size();
-
-        //convert into time->needed to reach city 
+        int count = 0, n = dist.size(); 
         for(int i = 0; i < n; i++)
-            if (dist[i] % speed[i] != 0) //d=5,s=3,time=1.6,after one minute->t = 0.6
-                dist[i] = (dist[i]/speed[i])+1;  //adding +1 to account for this 0.6 
+            if (dist[i] % speed[i] != 0) 
+                dist[i] = (dist[i]/speed[i])+1;  
             else 
                 dist[i] /= speed[i];
-        
-        //sort time, so we can eliminate monster that reaches first
         sort(dist.begin(),dist.end());
-
         for(int time = 0; time < n; time++){
-            if (dist[time] <= time) //monster reached city before or at time!
+            if (dist[time] <= time) 
                 break;
             count++;
         }
-
-
         return count;
     }
 };
